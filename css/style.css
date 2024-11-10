@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../img/booruneko.png');
+    background-image: url('../img/macje_storitve.png');
     background-repeat: repeat;
     background-size: 50px 50px; /* Default size */
 }
@@ -35,7 +35,7 @@ body {
 /* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
-        background-color: wheat; /* Light background */
+        background-color: #a8e2e9; /* Light background */
     }
 
     #telo {
