@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/booruneko.png');
+    background-repeat: repeat;
+    background-size: 50px 50px; /* Default size */
+}
+
+/* Adjust background size for larger screens using Bootstrap breakpoints */
+@media (min-width: 576px) {
+    body {
+        background-size: 75px 75px;
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        background-size: 100px 100px;
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        background-size: 150px 150px;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        background-size: 200px 200px;
+    }
+}
+
+
+/* Light mode styles */
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: wheat; /* Light background */
+    }
+
+    #telo {
+        background-color: #ffffff; /* Light background color */
+        color: #000000; /* Dark text color */
+    }
+
+    .navbar {
+        background-color: #ffffff; /* Light navbar background */
+    }
+
+    .nav-link {
+        color: #000000; /* Dark text color */
+    }
+
+    footer {
+        background-color: #ffffff; /* Light footer background */
+        color: #000000; /* Dark text color */
+    }
+    footer p {
+        color: #000000 !important; /* Dark text color for <p> elements in footer */
+    }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212; /* Very dark background */
+    }
+
+    #telo {
+        background-color: #1e1e1e; /* Dark background color */
+        color: #ffffff; /* Light text color */
+    }
+
+    .navbar {
+        background-color: #1e1e1e; /* Dark navbar background */
+    }
+
+    .nav-link {
+        color: #ffffff; /* Light text color */
+    }
+
+    footer {
+        background-color: #1e1e1e; /* Dark footer background */
+        color: #ffffff; /* Light text color */
+    }
+    footer p {
+        color: #ffffff !important; /* Light text color for <p> elements in footer */
+    }
+}
