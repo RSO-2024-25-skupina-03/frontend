@@ -72,11 +72,15 @@ body {
     }
 
     .navbar {
-        background-color: #1e1e1e; /* Dark navbar background */
+        background-color: #1e1e1e !important; /* Dark navbar background */
     }
 
     .nav-link {
-        color: #ffffff; /* Light text color */
+        color: #ffffff !important; /* Light text color */
+    }
+
+    .navbar-brand {
+        color: #ffffff !important; /* Light text color */
     }
 
     footer {
