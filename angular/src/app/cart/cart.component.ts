@@ -17,7 +17,10 @@ export class CartComponent {
   cartProductsList: {product: Product, quantity: number}[] = [];
   cartService: ProductsService = inject(ProductsService);
   filteredProducts: Product[] = [];
-  constructor() {}
+  totalPrice: number = 0;
+  constructor() {
+    this.totalPrice = this.getTotalPrice();
+  }
 
   ngOnInit() {
     this.loadProducts();
@@ -26,6 +29,16 @@ export class CartComponent {
   async loadProducts() {
     const cartProductsList = await this.cartService.getCartProducts();
     this.cartProductsList = cartProductsList;
+  }
+
+  getTotalPrice() {
+    return this.cartProductsList.reduce((acc, cartProduct) => {
+      return acc + cartProduct.product.price * cartProduct.quantity;
+    }, 0);
+  }
+
+  checkout() {
+    this.cartService.checkout();
   }
 
 }

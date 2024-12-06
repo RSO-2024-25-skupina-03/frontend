@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -113,7 +114,7 @@ export class ProductsService {
       quantity: 3
     }
   ];
-  constructor() { }
+
 
   async getAllProducts(): Promise<Product[]> {
     return this.products;
@@ -123,7 +124,15 @@ export class ProductsService {
     return this.cartProducts;
   }
 
-  async getProductById(id: string): Promise<Product|undefined> {
+  async getProductById(id: string): Promise<Product | undefined> {
     return this.products.find(product => product.id === id);
   }
+
+
+  constructor(private router: Router) { }
+
+  async checkout() {
+    await this.router.navigate(['/checkout']);
+  }
+
 }

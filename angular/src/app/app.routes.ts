@@ -3,6 +3,7 @@ import { ShopComponent } from './shop/shop.component';
 import { DetailsComponent } from './details/details.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routeConfig: Routes = [
     {
@@ -24,6 +25,11 @@ const routeConfig: Routes = [
         path: 'login',
         component: LoginComponent,
         title: 'Prijava',
+    },
+    {
+        path: 'checkout',
+        component: CheckoutComponent,
+        title: 'Plačilo',
     }
 ];
 export default routeConfig;
