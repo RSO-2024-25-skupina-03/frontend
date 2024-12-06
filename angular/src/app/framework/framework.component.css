@@ -1,0 +1,10 @@
+footer {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+@media (min-width: 1200px) {
+    .container-xl {
+        margin-top: 2rem !important;
+    }
+}

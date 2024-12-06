@@ -1,10 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../img/macje_storitve.png');
+    background-image: url('../public/img/macje_storitve.png');
     background-repeat: repeat;
     background-size: 50px 50px;
     /* Default size */
+}
+
+.container-xl {
+    flex-grow: 1;
 }
 
 /* Adjust background size for larger screens using Bootstrap breakpoints */
@@ -85,7 +90,7 @@ body {
     }
 
     .navbar {
-        background-color: #1e1e1e !important;
+        background-color: #313131 !important;
         /* Dark navbar background */
     }
 
@@ -110,7 +115,7 @@ body {
     }
 
     footer {
-        background-color: #1e1e1e;
+        background-color: #313131;
         /* Dark footer background */
         color: #ffffff;
         /* Light text color */

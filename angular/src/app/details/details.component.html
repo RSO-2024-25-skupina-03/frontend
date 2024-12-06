@@ -1,0 +1,16 @@
+<article>
+    <img class="product-image" [src]="product?.imageUrl" alt="appearance of {{ product?.name }}" crossorigin />
+    <section class="product">
+        <h2 class="product-name">{{ product?.name }}</h2>
+        <p class="product-seller">{{ product?.sellerId }}$</p>
+    </section>
+    <section class="product">
+        <h2 class="section-heading">About this product</h2>
+        <ul>
+            <li>In stock: {{ product?.stock }}</li>
+            <li>Product ID: {{ product?.id }}</li>
+            <li>price: {{product?.price}}$</li>
+            <li>description: {{ product?.description }}</li>
+        </ul>
+    </section>
+</article>

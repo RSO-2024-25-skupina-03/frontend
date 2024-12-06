@@ -1,0 +1,17 @@
+<form action="#" class="row row-cols-lg-auto g-3 align-items-center justify-content-center">
+    <h4>Iskanje</h4>
+    <div class="form-group mt-2">
+        <input type="text" class="form-control" id="search" placeholder="Vnesi iskalni niz" name="search" #filter />
+    </div>
+    <button type="button" class="btn btn-outline-dark custom-btn" (click)="filterResults(filter.value)">
+        <i class="fa-solid fa-magnifying-glass"></i> Išči
+    </button>
+</form>
+
+<div class="row d-flex flex-wrap">
+    <!-- <app-product *ngFor="let product of productsList" 
+    [product]="product"></app-product> -->
+    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let product of productsList">
+        <app-product [product]="product"></app-product>
+    </div>
+</div>

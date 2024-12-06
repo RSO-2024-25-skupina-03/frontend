@@ -1,0 +1,17 @@
+{
+  "name": "macje-storitve-frontend",
+  "version": "1.0.0",
+  "description": "frontend za projekt pri RSO",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nina",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "hbs": "^4.2.0"
+  }
+}
