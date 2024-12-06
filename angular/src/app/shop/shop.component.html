@@ -9,9 +9,7 @@
 </form>
 
 <div class="row d-flex flex-wrap">
-    <!-- <app-product *ngFor="let product of productsList" 
-    [product]="product"></app-product> -->
-    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let product of productsList">
+    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let product of filteredProducts">
         <app-product [product]="product"></app-product>
     </div>
 </div>

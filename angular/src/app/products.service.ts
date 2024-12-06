@@ -57,7 +57,7 @@ export class ProductsService {
       name: 'Product 6',
       price: 600,
       description: 'This is a description of product 6',
-      imageUrl: `${this.baseUrl}/image1.png`,
+      imageUrl: `${this.baseUrl}/image6.png`,
       stock: 60,
       sellerId: '6'
     },
@@ -66,7 +66,7 @@ export class ProductsService {
       name: 'Product 7',
       price: 700,
       description: 'This is a description of product 7',
-      imageUrl: `${this.baseUrl}/image2.png`,
+      imageUrl: `${this.baseUrl}/image7.png`,
       stock: 70,
       sellerId: '7'
     },
@@ -75,7 +75,7 @@ export class ProductsService {
       name: 'Product 8',
       price: 800,
       description: 'This is a description of product 8',
-      imageUrl: `${this.baseUrl}/image3.png`,
+      imageUrl: `${this.baseUrl}/image8.png`,
       stock: 80,
       sellerId: '8'
     },
@@ -84,7 +84,7 @@ export class ProductsService {
       name: 'Product 9',
       price: 900,
       description: 'This is a description of product 9',
-      imageUrl: `${this.baseUrl}/image4.png`,
+      imageUrl: `${this.baseUrl}/image9.png`,
       stock: 90,
       sellerId: '9'
     },
@@ -93,15 +93,34 @@ export class ProductsService {
       name: 'Product 10',
       price: 1000,
       description: 'This is a description of product 10',
-      imageUrl: `${this.baseUrl}/image5.png`,
+      imageUrl: `${this.baseUrl}/image10.png`,
       stock: 100,
       sellerId: '10'
     }
   ]
+
+  cartProducts: { product: Product, quantity: number }[] = [
+    {
+      product: this.products[5],
+      quantity: 1
+    },
+    {
+      product: this.products[6],
+      quantity: 2
+    },
+    {
+      product: this.products[7],
+      quantity: 3
+    }
+  ];
   constructor() { }
 
   async getAllProducts(): Promise<Product[]> {
     return this.products;
+  }
+
+  async getCartProducts(): Promise<{ product: Product, quantity: number }[]> {
+    return this.cartProducts;
   }
 
   async getProductById(id: string): Promise<Product|undefined> {

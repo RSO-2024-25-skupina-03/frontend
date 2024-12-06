@@ -1,1 +1,5 @@
-<p>cart works!</p>
+<div class="row d-flex flex-wrap">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-6 mb-12" *ngFor="let product of cartProductsList">
+        <app-cart-product [cartProduct]="product"></app-cart-product>
+    </div>
+</div>
