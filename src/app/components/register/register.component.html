@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-12 col-md-8">
+        <p>
+            Already have an account?
+            <a routerLink="/prijava" class="link-primary">login</a>
+        </p>
+        <form (ngSubmit)="onRegisterSubmit()"  autocomplete="off">
+            <div *ngIf="formError" class="form-group">
+                <div class="alert alert-dark p-2 mt-4" role="alert">
+                    <i class="fas fa-exclamation-triangle pe-2"></i>{{ formError }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="form-label mb-1">Username</label>
+                <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        [(ngModel)]="credentials.name"
+                />
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label mb-1 mt-3"
+                >E-mail</label
+                >
+                <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        id="email"
+                        name="email"
+                        placeholder="Enter e-mail address"
+                        [(ngModel)]="credentials.email"
+                />
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label mb-1 mt-3">Password</label>
+                <input
+                        type="password"
+                        class="form-control form-control-sm"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        [(ngModel)]="credentials.password"
+                />
+            </div>
+            <div class="form-group">
+                <label for="password2" class="form-label mb-1 mt-3">confirm Password</label>
+                <input
+                        type="password"
+                        class="form-control form-control-sm"
+                        id="password2"
+                        name="password2"
+                        placeholder="Enter password again"
+                        [(ngModel)]="confirmPassword"
+                />
+            </div>
+            <div class="form-group">
+                <label for="role" class="form-label mb-1 mt-3">Role</label>
+                <select
+                        class="form-control form-control-sm"
+                        id="role"
+                        name="role"
+                        [(ngModel)]="credentials.type"
+                >
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div *ngIf="credentials.type === 'admin'" class="form-group">
+                <label for="adminCode" class="form-label mb-1 mt-3">Admin Code</label>
+                <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        id="adminCode"
+                        name="adminCode"
+                        placeholder="Enter admin code"
+                        [(ngModel)]="credentials.adminKey"
+                />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary me-2">
+                    <i class="fa-regular fa-circle-check pe-2"></i>Registrer
+                </button>
+            </div>
+
+    </form>
+</div>
+</div>

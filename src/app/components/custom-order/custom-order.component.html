@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-12 col-md-8">
+        <h2 class="text-primary">Custom Order</h2>
+        <form (ngSubmit)="onOrderSubmit()" autocomplete="off">
+            <div *ngIf="formError" class="form-group">
+                <div class="alert alert-dark p-2 mt-4" role="alert">
+                    <i class="fas fa-exclamation-triangle pe-2"></i>{{ formError }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="orderDescription" class="form-label">Order Description</label>
+                <textarea
+                    id="orderDescription"
+                    class="form-control"
+                    rows="5"
+                    placeholder="Enter order description"
+                    [(ngModel)]="orderData.description"
+                    name="orderDescription"
+                    required="required"
+                ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="orderPrice" class="form-label">Price</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="orderPrice"
+                    placeholder="Enter price"
+                    [(ngModel)]="orderData.price"
+                    name="orderPrice"
+                />
+            </div>
+            <div class="form-group">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="quantity"
+                    placeholder="Enter quantity"
+                    [(ngModel)]="orderData.quantity"
+                    name="quantity"
+                    required="required"
+                />
+            </div>
+            <div class="form-group">
+                <label for="address" class="form-label">Address</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    placeholder="Enter address"
+                    [(ngModel)]="orderData.address"
+                    name="address"
+                    required="required"
+                />
+            </div>
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-sm btn-primary me-2">
+                    <i class="fa-regular fa-circle-check pe-2"></i>Place order
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

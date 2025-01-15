@@ -1,0 +1,16 @@
+<div class="card h-100">
+    <a [routerLink]="['/details', product.id]" class="text-decoration-none text-dark">
+        <img [src]="product.imageUrl" class="card-img-top" alt="Slika {{product.name}}" crossorigin>
+    </a>
+    <div class="card-body d-flex flex-column">
+        <a [routerLink]="['/details', product.id]" class="text-decoration-none text-dark">
+            <h5 class="card-title"><strong>{{product.name}}</strong></h5>
+            <p class="card-text price">{{product.price}}$</p>
+            <p class="card-text">{{product.description}}</p>
+        </a>
+        <button class="btn btn-outline-dark mt-auto" (click)="addToCart($event); $event.stopPropagation()">Dodaj v
+            košarico</button>
+    </div>
+
+
+</div>

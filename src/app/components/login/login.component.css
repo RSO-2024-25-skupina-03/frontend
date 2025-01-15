@@ -1,0 +1,70 @@
+/* Center alignment for the entire form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* Naslov */
+  .login-title {
+    margin-bottom: 5vh;
+  }
+  
+  /* Pozabljeno geslo */
+  .forgot-password {
+    text-align: left;
+    margin-bottom: 1vh;
+  }
+  
+  /* Gumbi */
+  .row p {
+    text-align: left;
+    margin-top: 2vh;
+  }
+  
+  .navbar-collapse {
+    float: right;
+  }
+  
+  /* Dodatni gumb */
+  #dodaj-gumb {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  /* Zgornji odmik */
+  .zg-odmik {
+    margin-top: 5vh;
+  }
+  
+  /* Vpisna polja */
+  .vpisna-polje {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    appearance: none;
+    background-color: #f0f5fa;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    box-shadow: var(--bs-box-shadow-inset);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+    font-size: 0.85rem;
+  }

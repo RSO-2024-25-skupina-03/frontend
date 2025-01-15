@@ -1,0 +1,50 @@
+/* Poskrbite, da bodo vsi radio gumbi v isti vrstici */
+.vpisna-polja .form-check-inline {
+    display: inline-flex;
+    align-items: left;
+    margin-right: 7px; /* Razmik med gumbi */
+  }
+  
+  /* Slog za oznake gumbov */
+  .vpisna-polja .form-check-label {
+    font-size: 1rem; /* Običajna velikost besedila */
+    font-weight: normal;
+  }
+  
+  /* Poravnava vsebine na začetek vrstice */
+  .vpisna-polja .input-group-sm {
+    display: flex;
+    flex-wrap: wrap; /* Da se vse lepo poravna v vrstico */
+    align-items: center;
+  }
+  
+  /* Registracija naslov */
+  .register-title {
+    margin-bottom: 5vh;
+    text-align: left;
+  }
+  
+  /* Input labels in polja */
+  .vpisna-polja label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  
+  .vpisna-polja input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  /* Gumbi */
+  .my-4 button {
+    margin: 0 10px;
+  }
+  
+  /* Razmik na vrhu */
+  .zg-odmik {
+    margin-top: 5vh;
+  }
+  
