@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component, inject, Input } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { Product } from '../../classes/product';
 
 @Component({
@@ -12,6 +12,11 @@ import { Product } from '../../classes/product';
 })
 export class ProductComponent {
   @Input() product!: Product;
+  tenant: string = '';
+  route: ActivatedRoute = inject(ActivatedRoute);
+  constructor() {
+    this.tenant = this.route.snapshot.params['tenant'];
+  }
   addToCart(event: Event): void {
     event.stopPropagation();
     // Add your logic to handle the button click here

@@ -95,19 +95,25 @@ body {
     }
 
     .nav-link {
-        color: #ffffff; /* Light text color */
+        color: #ffffff;
+        /* Light text color */
     }
-    
+
     .nav-link:hover {
-        background-color: #555555; /* Dark background color on hover */
-        color: #ffffff; /* Light text color */
+        background-color: #555555;
+        /* Dark background color on hover */
+        color: #ffffff;
+        /* Light text color */
     }
-    
+
     .navbar-brand {
-        color: #ffffff; /* Light text color */
+        color: #ffffff;
+        /* Light text color */
     }
+
     .navbar-brand:hover {
-        color: #9fd8e2; /* Light text color */
+        color: #9fd8e2;
+        /* Light text color */
     }
 
     .navbar-toggler-icon {
@@ -148,6 +154,23 @@ body {
 
     /* Custom icon styles */
     button.custom-btn i {
+        color: #ffffff;
+        /* Light text color */
+    }
+
+    /* Dark mode styles */
+    body button {
+        background-color: #333333;
+        /* Dark background color */
+        color: #ffffff;
+        /* Light text color */
+        border: 1px solid #ffffff;
+        /* Light border color */
+    }
+
+    body button:hover {
+        background-color: #444444;
+        /* Slightly lighter background on hover */
         color: #ffffff;
         /* Light text color */
     }

@@ -24,6 +24,7 @@ export class RegisterComponent {
     private historyService: HistoryService
 ) {
   this.tenant = this.router.url.split('/')[1];
+  console.log('tenant:', this.tenant);
 }
 
 protected formError!: string;
