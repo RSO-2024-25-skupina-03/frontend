@@ -2,7 +2,7 @@
     <div class="col-12 col-md-8">
         <p>
             Don't have an account?
-            <a routerLink="/register" class="link-primary">register</a>
+            <a routerLink="/{{tenant}}/register" class="link-primary">register</a>
         </p>
         <form (ngSubmit)="onLoginSubmit()" autocomplete="off">
             <div *ngIf="formError" class="form-group">

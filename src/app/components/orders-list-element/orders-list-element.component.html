@@ -1,0 +1,14 @@
+<div class="card h-100">
+    <a [routerLink]="['/', tenant, 'order-details', order._id]" class="text-decoration-none text-dark">
+
+
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title"><strong>{{order._id}}</strong></h5>
+            <p class="card-text">Buyer: {{order.buyer_id}}</p>
+            <p class="card-text">Seller: {{order.seller_id}}</p>
+            <p class="card-text">Product: {{order.product_id}}</p>
+            <p class="card-text">Date: {{order.date}}</p>
+        </div>
+    </a>
+
+</div>

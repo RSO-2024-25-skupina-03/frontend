@@ -1,7 +1,8 @@
+const domain = 'http://4.182.90.110.nip.io';
 export const environment = {
     production: true,
-    cartServiceUrl: 'http://cart',
-    stockServiceUrl: 'http://stock',
-    ordersServiceUrl: 'http://orders/api',
-    authenticationServiceUrl: 'http://authentication/api',
+    cartServiceUrl: domain + '/api/cart',
+    stockServiceUrl: domain + '/api/stock',
+    ordersServiceUrl: domain + '/api/orders',
+    authenticationServiceUrl: domain + '/api/authentication',
 };

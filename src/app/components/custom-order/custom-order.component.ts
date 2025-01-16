@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from '../../classes/order';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CommonModule } from '@angular/common';
-import { OrderService } from '../../services/order.service';
 import { FormsModule } from '@angular/forms';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'app-custom-order',
@@ -20,7 +20,7 @@ export class CustomOrderComponent {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private orderService: OrderService
+    private ordersService: OrdersService
   ) {
     this.tenant = this.router.url.split('/')[1];
     this.orderData.buyer_id = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
@@ -29,7 +29,7 @@ export class CustomOrderComponent {
       alert('Please log in to place an order.');
       this.router.navigateByUrl(`${this.tenant}/login`);
     }
-   }
+  }
   protected formError!: string;
   protected orderData: Order = {
     buyer_id: '',
@@ -46,32 +46,32 @@ export class CustomOrderComponent {
   };
   public onOrderSubmit(): void {
     this.formError = "";
-    if(!this.orderData.buyer_id) {
+    if (!this.orderData.buyer_id) {
       this.formError = "Please log in to place an order.";
       this.router.navigateByUrl(`${this.tenant}/login`);
-    } else if (!this.orderData.description){
+    } else if (!this.orderData.description) {
       this.formError = "Please enter a description.";
-    } else if (!this.orderData.quantity){
+    } else if (!this.orderData.quantity) {
       this.formError = "Please enter a quantity.";
-    } else if (!this.orderData.address){
+    } else if (!this.orderData.address) {
       this.formError = "Please enter an address.";
     }
     else this.doOrder();
   }
   private doOrder(): void {
-    this.orderService.createOrder(this.orderData).subscribe(
-      (response) => {
+    this.ordersService.createOrder(this.tenant, this.orderData).subscribe({
+      next: (response) => {
         console.log(response);
         alert('Order placed successfully');
         this.router.navigateByUrl(`/${this.tenant}`);
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
         this.formError = "An error occurred while placing the order.";
         if (error.error.message) {
           this.formError = error.error.message;
-        } 
+        }
       }
-    );
+    });
   }
 }

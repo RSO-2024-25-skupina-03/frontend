@@ -1,24 +1,24 @@
 <article class="container">
     <div class="row">
         <div class="col-md-6 order-md-1 mb-3">
-            <img class="product-image img-fluid" [src]="product?.imageUrl" alt="appearance of {{ product?.name }}" crossorigin />
+            <img class="img-fluid" [src]="product.image_b64" alt="product image">
         </div>
         <div class="col-md-6 order-md-2">
             <section class="product">
-                <h2 class="product-name">{{ product?.name }}</h2>
+                <h2 class="product-name">{{ product.name }}</h2>
                 <p class="product-seller">seller: 
-                    <a [routerLink]="['/custom-order', product?.sellerId]">
-                    {{ product?.sellerName }}
+                    <a [routerLink]="['/custom-order', product.seller_id]">
+                    {{ product.seller_name }}
                     </a>
                 </p>
             </section>
             <section class="product">
                 <h2 class="section-heading">About this product</h2>
                 <ul>
-                    <li>In stock: {{ product?.stock }}</li>
-                    <li>Product ID: {{ product?.id }}</li>
-                    <li>price: {{product?.price}}$</li>
-                    <li>description: {{ product?.description }}</li>
+                    <li>In stock: {{ product.stock }}</li>
+                    <li>Product ID: {{ product.product_id }}</li>
+                    <li>price: {{product.price}}$</li>
+                    <li>description: {{ product.description }}</li>
                 </ul>
             </section>
             <button class="btn btn-outline-dark mt-auto custom-btn" (click)="addToCart()">Dodaj v

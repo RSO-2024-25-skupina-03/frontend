@@ -1,8 +1,8 @@
-<a [routerLink]="['/details', cartProduct.product.id]" class="text-decoration-none text-dark">
+<a [routerLink]="['/details', cartProduct.product.product_id]" class="text-decoration-none text-dark">
     <div class="card h-100">
         <div class="row g-0">
             <div class="col-md-3">
-                <img [src]="cartProduct.product.imageUrl" class="img-fluid rounded-start"
+                <img [src]="cartProduct.product.image_b64" class="img-fluid rounded-start"
                     alt="Slika {{cartProduct.product.name}}" crossorigin>
             </div>
             <div class="col-md-9">

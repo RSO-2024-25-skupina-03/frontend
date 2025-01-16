@@ -9,6 +9,8 @@ import { CustomOrderComponent } from './components/custom-order/custom-order.com
 import { FirstPageComponent } from './components/first-page/first-page.component';
 import { FrameworkComponent } from './components/framework/framework.component';
 import { TenantSelectionLayoutComponent } from './components/tenant-selection-layout/tenant-selection-layout.component';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrderComponent } from './components/order/order.component';
 
 const routeConfig: Routes = [
     {
@@ -60,6 +62,16 @@ const routeConfig: Routes = [
                 path: 'custom-order/:id',
                 component: CustomOrderComponent,
                 title: 'Custom Order',
+            },
+            {
+                path: 'orders',
+                component: OrdersListComponent,
+                title: 'Orders',
+            },
+            {
+                path: 'order-details/:id',
+                component: OrderComponent,
+                title: 'Order Details',
             }
         ]
     }

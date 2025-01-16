@@ -7,108 +7,88 @@ import { Router } from '@angular/router';
 })
 export class ProductsService {
   readonly baseUrl = 'assets/img';
-  products: Product[] = [
+  private products: Product[] = [
     {
-      id: '1',
+      product_id: '1',
+      seller_id: '000000000000000000000001',
       name: 'Product 1',
       price: 100,
       description: 'This is a description of product 1',
-      imageUrl: `${this.baseUrl}/image1.png`,
-      stock: 10,
-      sellerId: '000000000000000000000001',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '2',
+      product_id: '2',
+      seller_id: '000000000000000000000002',
       name: 'Product 2',
       price: 200,
       description: 'This is a description of product 2',
-      imageUrl: `${this.baseUrl}/image2.png`,
-      stock: 20,
-      sellerId: '000000000000000000000002',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '3',
+      product_id: '3',
+      seller_id: '000000000000000000000003',
       name: 'Product 3',
       price: 300,
       description: 'This is a description of product 3',
-      imageUrl: `${this.baseUrl}/image3.png`,
-      stock: 30,
-      sellerId: '000000000000000000000003',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '4',
+      product_id: '4',
+      seller_id: '000000000000000000000004',
       name: 'Product 4',
       price: 400,
       description: 'This is a description of product 4',
-      imageUrl: `${this.baseUrl}/image4.png`,
-      stock: 40,
-      sellerId: '000000000000000000000004',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '5',
+      product_id: '5',
+      seller_id: '000000000000000000000005',
       name: 'Product 5',
       price: 500,
       description: 'This is a description of product 5',
-      imageUrl: `${this.baseUrl}/image5.png`,
-      stock: 50,
-      sellerId: '000000000000000000000005',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '6',
+      product_id: '6',
+      seller_id: '000000000000000000000006',
       name: 'Product 6',
       price: 600,
       description: 'This is a description of product 6',
-      imageUrl: `${this.baseUrl}/image6.png`,
-      stock: 60,
-      sellerId: '000000000000000000000006',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '7',
+      product_id: '7',
+      seller_id: '000000000000000000000007',
       name: 'Product 7',
       price: 700,
       description: 'This is a description of product 7',
-      imageUrl: `${this.baseUrl}/image7.png`,
-      stock: 70,
-      sellerId: '000000000000000000000007',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '8',
+      product_id: '8',
+      seller_id: '000000000000000000000008',
       name: 'Product 8',
       price: 800,
       description: 'This is a description of product 8',
-      imageUrl: `${this.baseUrl}/image8.png`,
-      stock: 80,
-      sellerId: '000000000000000000000008',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '9',
+      product_id: '9',
+      seller_id: '000000000000000000000009',
       name: 'Product 9',
       price: 900,
       description: 'This is a description of product 9',
-      imageUrl: `${this.baseUrl}/image9.png`,
-      stock: 90,
-      sellerId: '000000000000000000000009',
-      sellerName: 'Anja'
+      image_b64: ''
     },
     {
-      id: '10',
+      product_id: '10',
+      seller_id: '000000000000000000000010',
       name: 'Product 10',
       price: 1000,
       description: 'This is a description of product 10',
-      imageUrl: `${this.baseUrl}/image10.png`,
-      stock: 100,
-      sellerId: '000000000000000000000010',
-      sellerName: 'Anja'
+      image_b64: ''
     }
-  ]
+  ];
 
   cartProducts: { product: Product, quantity: number }[] = [
     {
@@ -125,6 +105,27 @@ export class ProductsService {
     }
   ];
 
+  private convertImagesToBase64(): void {
+    this.products.forEach(product => {
+      const imageUrl = `${this.baseUrl}/image${product.product_id}.png`;
+      this.getBase64ImageFromUrl(imageUrl).then(base64 => {
+        product.image_b64 = base64;
+      }).catch(err => {
+        console.error('Error converting image to base64', err);
+      });
+    });
+  }
+  private async getBase64ImageFromUrl(imageUrl: string): Promise<string> {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
 
   async getAllProducts(): Promise<Product[]> {
     return this.products;
@@ -135,11 +136,13 @@ export class ProductsService {
   }
 
   async getProductById(id: string): Promise<Product | undefined> {
-    return this.products.find(product => product.id === id);
+    return this.products.find(product => product.product_id === id);
   }
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.convertImagesToBase64();
+   }
 
   async checkout() {
     await this.router.navigate(['/checkout']);

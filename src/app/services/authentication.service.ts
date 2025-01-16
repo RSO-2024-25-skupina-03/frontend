@@ -15,14 +15,14 @@ export class AuthenticationService {
     private readonly demoDataService: DemoDataService
   ) { }
   public login(user: User, tenant: string): Observable<AuthResponse> {
-    return this.demoDataService.login(user).pipe(
+    return this.demoDataService.login(user, tenant).pipe(
       tap((authResponse: AuthResponse) => {
         this.saveToken(authResponse.token, tenant);
       })
     );
   }
   public register(user: User, tenant: string): Observable<AuthResponse> {
-    return this.demoDataService.register(user).pipe(
+    return this.demoDataService.register(user, tenant).pipe(
       tap((authResponse: AuthResponse) => {
         this.saveToken(authResponse.token, tenant);
       })

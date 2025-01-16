@@ -22,68 +22,68 @@ export class RegisterComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     private historyService: HistoryService
-) {
-  this.tenant = this.router.url.split('/')[1];
-  console.log('tenant:', this.tenant);
-}
+  ) {
+    this.tenant = this.router.url.split('/')[1];
+    console.log('tenant:', this.tenant);
+  }
 
-protected formError!: string;
-protected credentials: User = {
-  name: "",
-  email: "",
-  password: "",
-  type: "user",
-  adminKey: ""
-};
-protected confirmPassword: string = "";
+  protected formError!: string;
+  protected credentials: User = {
+    name: "",
+    email: "",
+    password: "",
+    type: "user",
+    adminKey: ""
+  };
+  protected confirmPassword: string = "";
 
-public header = {
-  title: "Register"
-}
-public onRegisterSubmit() {
-  this.formError = "";
-  if (
+  public header = {
+    title: "Register"
+  }
+  public onRegisterSubmit() {
+    this.formError = "";
+    if (
       !this.credentials.name ||
       !this.credentials.email ||
       !this.credentials.password
-  )
-    this.formError = "Name or email or password is missing";
-  else if (
+    )
+      this.formError = "Name or email or password is missing";
+    else if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-          this.credentials.email
+        this.credentials.email
       )
-  )
-    this.formError = "Email is not valid";
-  else if (this.credentials.password !== this.confirmPassword)
-    this.formError = "Passwords do not match";
-  else if (this.credentials.type === "admin" && !this.credentials.adminKey)
-    this.formError = "Admin key is missing";
-  else this.doRegister();
-}
-private doRegister() {
-  this.authenticationService
+    )
+      this.formError = "Email is not valid";
+    else if (this.credentials.password !== this.confirmPassword)
+      this.formError = "Passwords do not match";
+    else if (this.credentials.type === "admin" && !this.credentials.adminKey)
+      this.formError = "Admin key is missing";
+    else this.doRegister();
+  }
+  private doRegister() {
+    this.authenticationService
       .register(this.credentials, this.tenant)
       .pipe(
-          catchError((error: HttpErrorResponse) => {
-            this.formError = error.message.toString();
-            console.log(error);
-            return throwError(() => error);
-          })
+        catchError((error: HttpErrorResponse) => {
+          this.formError = error.message.toString();
+          console.log(error);
+          return throwError(() => error);
+        })
       )
       .subscribe({
         next: () => {
-          this.router.navigateByUrl(this.historyService.getPreviousUrl());
+          this.router.navigateByUrl(this.historyService.getLastNonLoginUrl());
         },
         error: (error) => {
           console.error('registration error:', error);
-          if(error.status === 409) {
+          if (error.status === 409) {
             this.formError = "Uporabnik s tem email naslovom že obstaja."
-          } else if (error.status == 0){
+          } else if (error.status == 0) {
             this.formError = "Napaka pri povezavi s strežnikom."
-          } else if (error.error?.message){
+          } else if (error.error?.message) {
             this.formError = error.error.message
           }
         }
       });
-}
+  }
 }

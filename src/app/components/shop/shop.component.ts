@@ -3,6 +3,8 @@ import { ProductComponent } from "../product/product.component";
 import { Product } from '../../classes/product';
 import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
+import { StockService } from '../../services/stock.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -15,16 +17,34 @@ export class ShopComponent {
   productsList: Product[] = [];
   productsService: ProductsService = inject(ProductsService);
   filteredProducts: Product[] = [];
-  constructor() {}
+  tenant: string = '';
+  constructor(
+    private stockService: StockService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.loadProducts();
+    this.tenant = this.router.url.split('/')[1];
+    // this.loadProducts();
+    this.loadStockProducts();
   }
 
   async loadProducts() {
     const productsList = await this.productsService.getAllProducts();
     this.productsList = productsList;
     this.filteredProducts = productsList;
+  }
+
+  async loadStockProducts() {
+    const productsList = this.stockService.getProducts(this.tenant).subscribe({
+      next: (products) => {
+        this.productsList = products;
+        this.filteredProducts = products;
+      },
+      error: (error) => {
+        console.error('Error loading products');
+      },
+    });
   }
   filterResults(text: string) {
     if (!text) {

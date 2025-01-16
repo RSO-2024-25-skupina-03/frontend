@@ -19,18 +19,20 @@ export class DemoDataService {
     @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
-  public login(user: User): Observable<AuthResponse> {
+  public login(user: User, tenant: string): Observable<AuthResponse> {
     
-    return this.makeAuthApiCall("login", user);
+    return this.makeAuthApiCall("login", user, tenant);
   }
-  public register(user: User): Observable<AuthResponse> {
-    return this.makeAuthApiCall("register", user);
+  public register(user: User, tenant: string): Observable<AuthResponse> {
+    return this.makeAuthApiCall("register", user, tenant);
   }
   private makeAuthApiCall(
     urlPath: string,
-    user: User
+    user: User,
+    tenant: string,
   ): Observable<AuthResponse> {
-    const url: string = `${this.authUrl}/${urlPath}`;
+    const url: string = `${this.authUrl}/${tenant}/${urlPath}`;
+    console.log('auth url:', url);
     let body = new HttpParams().set("email", user.email);
     if (user.name) body = body.set("name", user.name);
     if (user.password) body = body.set("password", user.password);
@@ -66,9 +68,9 @@ export class DemoDataService {
    */
 
   // Get user name by ID
-  public getUserNameById(userId: string): Observable<any> {
+  public getUserNameById(userId: string, tenant: string): Observable<any> {
     return this.http
-      .get(`${this.authUrl}/username/${userId}`)
+      .get(`${this.authUrl}/${tenant}/username/${userId}`)
       .pipe(catchError(this.handleError));
   }
 
