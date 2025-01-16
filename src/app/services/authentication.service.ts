@@ -14,28 +14,28 @@ export class AuthenticationService {
     @Inject(BROWSER_STORAGE) private readonly storage: Storage,
     private readonly demoDataService: DemoDataService
   ) { }
-  public login(user: User): Observable<AuthResponse> {
+  public login(user: User, tenant: string): Observable<AuthResponse> {
     return this.demoDataService.login(user).pipe(
       tap((authResponse: AuthResponse) => {
-        this.saveToken(authResponse.token);
+        this.saveToken(authResponse.token, tenant);
       })
     );
   }
-  public register(user: User): Observable<AuthResponse> {
+  public register(user: User, tenant: string): Observable<AuthResponse> {
     return this.demoDataService.register(user).pipe(
       tap((authResponse: AuthResponse) => {
-        this.saveToken(authResponse.token);
+        this.saveToken(authResponse.token, tenant);
       })
     );
   }
-  public logout(): void {
-    this.storage.removeItem("macje-token");
+  public logout(tenant: string): void {
+    this.storage.removeItem(`macje-token-${tenant}`);
   }
-  public getToken(): string | null {
-    return this.storage.getItem("macje-token");
+  public getToken(tenant: string): string | null {
+    return this.storage.getItem(`macje-token-${tenant}`);
   }
-  public saveToken(token: string): void {
-    this.storage.setItem("macje-token", token);
+  public saveToken(token: string, tenant: string): void {
+    this.storage.setItem(`macje-token-${tenant}`, token);
   }
   private b64Utf8(input: string): string {
     return decodeURIComponent(
@@ -47,17 +47,17 @@ export class AuthenticationService {
     );
   }
 
-  public isLoggedIn(): boolean {
-    const token: string | null = this.getToken();
+  public isLoggedIn(tenant: string): boolean {
+    const token: string | null = this.getToken(tenant);
     if (token) {
       const payload = JSON.parse(this.b64Utf8(token.split(".")[1]));
       return payload.exp > Date.now() / 1000;
     } else return false;
   }
-  public getCurrentUser(): User {
+  public getCurrentUser(tenant: string): User {
     let user: User = new User();
-    if (this.isLoggedIn()) {
-      let token: string | null = this.getToken();
+    if (this.isLoggedIn(tenant)) {
+      let token: string | null = this.getToken(tenant);
       if (token) {
         const payload = JSON.parse(this.b64Utf8(token.split(".")[1]));
         let { _id, email, name, type} = payload;

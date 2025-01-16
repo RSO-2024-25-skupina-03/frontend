@@ -13,20 +13,31 @@ import { User } from '../../classes/user';
   styleUrl: './framework.component.css'
 })
 export class FrameworkComponent {
-  constructor(private readonly authenticationService: AuthenticationService,
-    private readonly historyService: HistoryService) {}
+  tenant: string = '';
+
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly historyService: HistoryService,
+    private readonly router: Router,
+  ) {
+    this.router.events.subscribe(() => {
+      const url = this.router.url;
+      const match = url.match(/^\/([^\/]+)/);
+      this.tenant = match ? match[1] : '';
+    });
+  }
 public logout(): void {
-this.authenticationService.logout();
+this.authenticationService.logout(this.tenant);
 }
 public isLoggedIn(): boolean {
-return this.authenticationService.isLoggedIn();
+return this.authenticationService.isLoggedIn(this.tenant);
 }
 public getCurrentUser(): string {
-const user: User | null = this.authenticationService.getCurrentUser();
+const user: User | null = this.authenticationService.getCurrentUser(this.tenant);
 return user && user.name ? user.name : "Guest";
 }
 public isAdmin(): boolean {
-const user: User | null = this.authenticationService.getCurrentUser();
+const user: User | null = this.authenticationService.getCurrentUser(this.tenant);
 return user && user.type === "admin";
 }
 }

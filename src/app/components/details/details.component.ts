@@ -13,6 +13,7 @@ import { CartService } from '../../services/cart.service';
   styleUrl: './details.component.css'
 })
 export class DetailsComponent {
+  tenant: string = '';
   route: ActivatedRoute = inject(ActivatedRoute);
   productsService: ProductsService = inject(ProductsService);
   product: Product | undefined;
@@ -21,7 +22,8 @@ export class DetailsComponent {
     private authenticationService: AuthenticationService,
     private cartService: CartService,
   ) {
-    this.userId = this.authenticationService.getCurrentUser()?._id;
+    this.tenant = this.route.snapshot.params['tenant'];
+    this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id;
   }
 
   ngOnInit() {

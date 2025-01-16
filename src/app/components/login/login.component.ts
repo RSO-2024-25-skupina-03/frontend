@@ -16,11 +16,15 @@ import { User } from '../../classes/user';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  tenant: string = '';
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private historyService: HistoryService
-  ) { }
+  ) {
+    this.tenant = this.router.url.split('/')[1];
+  }
   protected formError!: string;
   protected credentials: User = {
     email: "",
@@ -46,7 +50,7 @@ export class LoginComponent {
   }
   private doLogin(): void {
     this.authenticationService
-      .login(this.credentials)
+      .login(this.credentials, this.tenant)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.formError = error.message;
