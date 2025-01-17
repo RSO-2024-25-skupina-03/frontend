@@ -11,6 +11,8 @@ import { FrameworkComponent } from './components/framework/framework.component';
 import { TenantSelectionLayoutComponent } from './components/tenant-selection-layout/tenant-selection-layout.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { OrderComponent } from './components/order/order.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SellComponent } from './components/sell/sell.component';
 
 const routeConfig: Routes = [
     {
@@ -72,6 +74,16 @@ const routeConfig: Routes = [
                 path: 'order-details/:id',
                 component: OrderComponent,
                 title: 'Order Details',
+            },
+            {
+                path: 'notifications',
+                component: NotificationsComponent,
+                title: 'Notifications',
+            },
+            {
+                path: 'sell',
+                component: SellComponent,
+                title: 'Sell',
             }
         ]
     }

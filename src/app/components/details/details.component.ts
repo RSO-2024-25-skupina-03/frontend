@@ -78,7 +78,7 @@ export class DetailsComponent {
   addToCart(): void {
     if (!this.userId) {
       alert('Please log in to add products to your cart.');
-    } else if (this.product) {
+    } else if (this.product && this.product.product_id) {
       this.cartService.addToCart(this.userId, this.product.product_id, this.tenant).subscribe({
        next: () => {
         alert('Product added to cart');

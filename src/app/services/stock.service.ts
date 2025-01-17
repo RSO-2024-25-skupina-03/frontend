@@ -27,6 +27,26 @@ export class StockService {
         ;
     }
 
+    public addProduct(tenant: string, product: Product): Observable<Product> {
+      const token = this.authenticationService.getToken(tenant);
+      const headers = { Authorization: `Bearer ${token}` };
+      const url = `${this.stockUrl}/${tenant}/product`;
+      console.log("adding product..." + url);
+      return this.http.post<Product>(url, product, { headers })
+        .pipe(catchError(this.demoDataService.handleError))
+        ;
+    }
+
+    public changeStock(tenant: string, product_id: string, amount: number): Observable<{product_id: string, stock_amount: number}> {
+      const token = this.authenticationService.getToken(tenant);
+      const headers = { Authorization: `Bearer ${token}` };
+      const url = `${this.stockUrl}/${tenant}/stock/${product_id}/${amount}`;
+      console.log("changing stock..." + url);
+      return this.http.put<{product_id: string, stock_amount: number}>(url, { headers })
+        .pipe(catchError(this.demoDataService.handleError))
+        ;
+    }
+
     public getProductsIds(tenant: string): Observable<string[]> {
       /*response body: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]*/
       const url = `${this.stockUrl}/${tenant}/ids`;
@@ -77,6 +97,9 @@ export class StockService {
               return this.getProductInfo(tenant, id)
                 .pipe(
                   switchMap((product) => {
+                    if(!product.product_id) {
+                      return [];
+                    }
                     return this.getProductStock(tenant, product.product_id)
                       .pipe(
                         map((stock) => {

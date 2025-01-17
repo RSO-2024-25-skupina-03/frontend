@@ -5,4 +5,5 @@ export const environment = {
     stockServiceUrl: domain + '/api/stock',
     ordersServiceUrl: domain + '/api/orders',
     authenticationServiceUrl: domain + '/api/authentication',
+    notificationsUrl: domain + '/api/notifications',
 };

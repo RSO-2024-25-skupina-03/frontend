@@ -39,6 +39,10 @@ export class CartProductComponent {
       console.log('Could not get current user for cart product');
       return;
     }
+    if(!this.cartProduct.product.product_id) {
+      console.log('Could not get product id for cart product');
+      return;
+    }
     this.cartService.addToCart(this.userId, this.cartProduct.product.product_id, this.tenant).subscribe({
       next: () => {
         this.cartProduct.quantity++;
@@ -58,6 +62,10 @@ export class CartProductComponent {
       console.log('Could not get current user for cart product');
       return;
     }
+    if(!this.cartProduct.product.product_id) {
+      console.log('Could not get product id for cart product');
+      return;
+    }
     this.cartService.deleteFromCart(this.userId, this.cartProduct.product.product_id, this.tenant).subscribe({
       next: () => {
         this.cartProduct.quantity--;
@@ -75,6 +83,10 @@ export class CartProductComponent {
     }
     if(this.userId === '') {
       console.log('Could not get current user for cart product');
+      return;
+    }
+    if(!this.cartProduct.product.product_id) {
+      console.log('Could not get product id for cart product');
       return;
     }
     this.cartService.removeFromCart(this.userId, this.cartProduct.product.product_id, this.tenant).subscribe({

@@ -28,6 +28,12 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/{{tenant}}/orders" *ngIf="isLoggedIn()">Orders</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/{{tenant}}/notifications" *ngIf="isLoggedIn()">Notifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/{{tenant}}/sell" *ngIf="isLoggedIn()">Sell</a>
+                </li>
                 <li class="nav-item" *ngIf="isAdmin()">
                     <button class="btn btn-primary" (click)="fillData()">Fill Data</button>
                 </li>
