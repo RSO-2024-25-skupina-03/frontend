@@ -50,10 +50,11 @@ export class OrdersService {
       ;
   }
 
-  public checkout(userId: string, tenant: string): Observable<OrderResponse> {
+  public checkout(userId: string, tenant: string, address:string): Observable<OrderResponse> {
     const token = this.authenticationService.getToken(tenant);
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.post<OrderResponse>(`${this.ordersUrl}/${tenant}/checkout/${userId}`, { headers })
+    const body = { address: address };
+    return this.http.post<OrderResponse>(`${this.ordersUrl}/${tenant}/checkout/${userId}`, body, { headers })
       .pipe(catchError(this.demoDataService.handleError))
       ;
   }

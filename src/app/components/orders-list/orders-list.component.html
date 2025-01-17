@@ -1,9 +1,11 @@
+<h1 class="text-center">Orders</h1>
+<h1 class="text-center">Selled Orders</h1>
 <div class="row d-flex flex-wrap">
     <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let order of sellerOrders">
         <app-orders-list-element [order]="order"></app-orders-list-element>
     </div>
 </div>
-
+<h1 class="text-center">Buyed Orders</h1>
 <div class="row d-flex flex-wrap">
     <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let order of buyerOrders">
         <app-orders-list-element [order]="order"></app-orders-list-element>

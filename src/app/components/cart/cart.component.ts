@@ -8,19 +8,22 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StockService } from '../../services/stock.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartProductComponent, CommonModule, RouterModule],
+  imports: [CartProductComponent, CommonModule, RouterModule, FormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
   userId = '';
   tenant = '';
-  cartProductsList: { product_id: string, quantity: number }[] = [];
+  address = '';
+  userCart: { product_id: string, quantity: number }[] = [];
+  cartProductsList: { product: Product, quantity: number }[] = [];
   filteredProducts: Product[] = [];
   totalPrice: number = 0;
   constructor(
@@ -31,15 +34,16 @@ export class CartComponent {
     private authenticationService: AuthenticationService,
     private router: Router,
   ) {
-    
+
   }
 
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
     this.userId = this.authenticationService.getCurrentUser(this.tenant)._id || '';
-    if(!this.userId) {
+    if (!this.userId) {
+      console.log(this.authenticationService.getCurrentUser(this.tenant));
+
       alert('Please login to view your cart');
-      this.router.navigate([`/${this.tenant}/login`]);
     }
     this.loadProducts();
   }
@@ -47,7 +51,20 @@ export class CartComponent {
   async loadProducts() {
     this.cartService.getCartProducts(this.userId, this.tenant).subscribe({
       next: (userCart) => {
-        this.cartProductsList = userCart.contents;
+        this.userCart = userCart.contents;
+        this.userCart.forEach(async (cartProduct) => {
+          this.stockService.getProductInfo(this.tenant, cartProduct.product_id).subscribe({
+            next: (product) => {
+              product.product_id = cartProduct.product_id;
+              this.cartProductsList.push({ product: product, quantity: cartProduct.quantity });
+              this.getTotalPrice();
+            },
+            error: (error) => {
+              console.error('Error loading product');
+              console.error(error);
+            },
+          });
+        });
         this.getTotalPrice();
       },
       error: (error) => {
@@ -56,20 +73,15 @@ export class CartComponent {
     });
   }
 
-  getTotalPrice(){
+
+
+  getTotalPrice() {
     //for each item in cart get product info from stock service
     //get price
     //multiply price by quantity
     //sum all prices
     this.cartProductsList.forEach(async (cartProduct) => {
-      this.stockService.getProductInfo(this.tenant, cartProduct.product_id).subscribe({
-        next: (product) => {
-          this.totalPrice += product.price * cartProduct.quantity;
-        },
-        error: (error) => {
-          console.error('Error loading product info');
-        },
-      });
+      this.totalPrice = this.totalPrice + (cartProduct.product.price * cartProduct.quantity);
     });
   }
 
@@ -84,8 +96,12 @@ export class CartComponent {
   //   }, 0);
   // }
 
-  checkout() {
-    this.ordersService.checkout(this.userId, this.tenant).subscribe({
+  checkout(address: string) {
+    if(!address) {
+      alert('Please enter an address');
+      return;
+    }
+    this.ordersService.checkout(this.userId, this.tenant, address).subscribe({
       next: (order) => {
         alert('Order placed successfully');
         this.router.navigate([`/${this.tenant}/orders`]); // redirect to orders page

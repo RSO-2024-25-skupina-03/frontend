@@ -25,6 +25,22 @@ export class CartService {
       ;
   }
 
+  public removeFromCart(userId: string, productId: string, tenant: string): Observable<string> {
+    const token = this.authenticationService.getToken(tenant);
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.put<string>(`${this.cartUrl}/${tenant}/cart/${userId}/${productId}`, { headers })
+      .pipe(catchError(this.demoDataService.handleError))
+      ;
+  }
+
+  public deleteFromCart(userId: string, productId: string, tenant: string): Observable<string> {
+    const token = this.authenticationService.getToken(tenant);
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.delete<string>(`${this.cartUrl}/${tenant}/cart/${userId}/${productId}`, { headers })
+      .pipe(catchError(this.demoDataService.handleError))
+      ;
+  }
+
   public getCartProducts(userId: string, tenant: string): Observable<Cart> {
     const token = this.authenticationService.getToken(tenant);
     const headers = { Authorization: `Bearer ${token}` };

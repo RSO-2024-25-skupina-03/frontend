@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/{{tenant}}/cart"><i class="bi bi-cart"></i> Cart</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/{{tenant}}/orders" *ngIf="isLoggedIn()">Orders</a>
+                </li>
                 <li class="nav-item" *ngIf="isAdmin()">
                     <button class="btn btn-primary" (click)="fillData()">Fill Data</button>
                 </li>

@@ -64,8 +64,13 @@ export class OrderComponent {
   }
 
   changeStatus() {
-    this.order.status = this.newStatus;
     if (this.orderId) {
+      if(this.order.seller_id !== this.userId) {
+        console.error('User is not the seller of this order');
+        alert('User is not the seller of this order');
+        return;
+      }
+      this.order.status = this.newStatus;
       this.ordersService.updateOrder(this.tenant, this.order, this.orderId).subscribe({
         next: (response) => {
           console.log(response);
