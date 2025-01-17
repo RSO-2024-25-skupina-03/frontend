@@ -6,8 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-to try running the container that runs in production, you can use the command `docker compose up`
-to test locally with the backend you need to run the microservices using the project in docker-compose repository
+To try running the container that runs in production, you can use the command `docker compose up`.
+
+To test locally with the backend you need to run the microservices using the project in docker-compose repository.
 <!--
 ## Code scaffolding
 
