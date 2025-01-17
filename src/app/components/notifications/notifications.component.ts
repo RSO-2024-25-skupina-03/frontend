@@ -24,7 +24,7 @@ export class NotificationsComponent {
 
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
-    this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+    this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     if(!this.userId) {
       alert('Please login to view your notifications');
     }

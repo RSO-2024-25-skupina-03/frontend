@@ -60,8 +60,8 @@ export class AuthenticationService {
       let token: string | null = this.getToken(tenant);
       if (token) {
         const payload = JSON.parse(this.b64Utf8(token.split(".")[1]));
-        let { _id, email, name, type} = payload;
-        user = { _id: _id, email: email, name: name, type: type };
+        let { _id, id, email, name, type} = payload;
+        user = { _id: _id, id: id, email: email, name: name, type: type };
       }
     }
     return user;

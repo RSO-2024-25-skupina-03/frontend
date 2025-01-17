@@ -5,5 +5,6 @@ export class User {
     type?: string;
     _id?: string;
     adminKey?: string;
+    id?: string;
   }
   

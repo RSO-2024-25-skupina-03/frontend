@@ -21,15 +21,7 @@ export class CustomOrderComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     private ordersService: OrdersService
-  ) {
-    this.tenant = this.router.url.split('/')[1];
-    this.orderData.buyer_id = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
-    if (!this.orderData.buyer_id) {
-      console.log('Could not get current user');
-      alert('Please log in to place an order.');
-      this.router.navigateByUrl(`${this.tenant}/login`);
-    }
-  }
+  ) { }
   protected formError!: string;
   protected orderData: Order = {
     buyer_id: '',
@@ -44,6 +36,21 @@ export class CustomOrderComponent {
   public header = {
     title: "Login",
   };
+
+  ngOnInit() {
+    this.tenant = this.router.url.split('/')[1];
+    this.orderData.buyer_id = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
+    if(!this.orderData.buyer_id) {
+      const user = this.authenticationService.getCurrentUser(this.tenant);
+      console.log(user);
+      this.orderData.buyer_id = user?.id || '';
+    }
+    if (!this.orderData.buyer_id) {
+      console.log('Could not get current user');
+      alert('Please log in to place an order.');
+    }
+  }
+
   public onOrderSubmit(): void {
     this.formError = "";
     if (!this.orderData.buyer_id) {

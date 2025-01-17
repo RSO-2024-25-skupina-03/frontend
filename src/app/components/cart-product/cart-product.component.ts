@@ -24,7 +24,7 @@ export class CartProductComponent {
 
   ngOnInit() {
     const user = this.authenticationService.getCurrentUser(this.tenant);
-    this.userId = user?._id || '';
+    this.userId = user?.id || '';
     this.tenant = this.router.url.split('/')[1];
     if(!this.userId) {
       console.log('Could not get current user for cart product');
@@ -33,7 +33,7 @@ export class CartProductComponent {
 
   cartAdd() {
     if(this.userId === '') {
-      this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+      this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     }
     if(this.userId === '') {
       console.log('Could not get current user for cart product');
@@ -56,7 +56,7 @@ export class CartProductComponent {
 
   cartDelete() {
     if(this.userId === '') {
-      this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+      this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     }
     if(this.userId === '') {
       console.log('Could not get current user for cart product');
@@ -79,7 +79,7 @@ export class CartProductComponent {
 
   cartRemove() {
     if(this.userId === '') {
-      this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+      this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     }
     if(this.userId === '') {
       console.log('Could not get current user for cart product');

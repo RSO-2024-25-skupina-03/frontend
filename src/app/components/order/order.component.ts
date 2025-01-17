@@ -42,7 +42,7 @@ export class OrderComponent {
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
     console.log("[order component] tenant: ", this.tenant);
-    this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+    this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     if (!this.userId) {
       alert('Please login to view your orders');
       this.router.navigate([`/${this.tenant}/login`]);

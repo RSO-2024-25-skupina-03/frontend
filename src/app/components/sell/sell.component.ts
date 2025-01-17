@@ -30,7 +30,7 @@ export class SellComponent {
 
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
-    this.seller_id = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+    this.seller_id = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     if (!this.seller_id) {
       alert('Please login to sell products');
     }

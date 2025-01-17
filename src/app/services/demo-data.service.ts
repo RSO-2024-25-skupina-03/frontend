@@ -7,6 +7,9 @@ import { AuthResponse } from "../classes/authresponse";
 import { User } from "../classes/user";
 import { BROWSER_STORAGE } from "../classes/storage";
 
+interface UsernameResponse {
+  name: string;
+}
 
 @Injectable({
   providedIn: "root",
@@ -68,9 +71,9 @@ export class DemoDataService {
    */
 
   // Get user name by ID
-  public getUserNameById(userId: string, tenant: string): Observable<any> {
+  public getUserNameById(userId: string, tenant: string): Observable<UsernameResponse> {
     return this.http
-      .get(`${this.authUrl}/${tenant}/username/${userId}`)
+      .get<UsernameResponse>(`${this.authUrl}/${tenant}/username/${userId}`)
       .pipe(catchError(this.handleError));
   }
 

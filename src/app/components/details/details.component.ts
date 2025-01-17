@@ -40,7 +40,7 @@ export class DetailsComponent {
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
     console.log("[details component] tenant: ", this.tenant);
-    this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id;
+    this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id;
     console.log("[details component] userId: ", this.userId);
     const productId = this.route.snapshot.params['id'];
     // this.productsService.getProductById(productId).then((product) => {
@@ -52,9 +52,9 @@ export class DetailsComponent {
         this.stockService.getProductStock(this.tenant, productId).subscribe({
           next: (stock) => {
             this.product.stock = stock.stock_amount;
-            this.demoDataService.getUserNameById(this.tenant, product.seller_id).subscribe({
+            this.demoDataService.getUserNameById(product.seller_id, this.tenant).subscribe({
               next: (sellerName) => {
-                this.product.seller_name = sellerName;
+                this.product.seller_name = sellerName.name;
               },
               error: (error) => {
                 console.error('Error loading seller name');

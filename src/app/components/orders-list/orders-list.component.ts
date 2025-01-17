@@ -27,7 +27,7 @@ export class OrdersListComponent {
 
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
-    this.userId = this.authenticationService.getCurrentUser(this.tenant)?._id || '';
+    this.userId = this.authenticationService.getCurrentUser(this.tenant)?.id || '';
     if(!this.userId) {
       console.log('Could not get current user');
       alert('Please log in to view your orders');

@@ -39,7 +39,7 @@ export class CartComponent {
 
   ngOnInit() {
     this.tenant = this.router.url.split('/')[1];
-    this.userId = this.authenticationService.getCurrentUser(this.tenant)._id || '';
+    this.userId = this.authenticationService.getCurrentUser(this.tenant).id || '';
     if (!this.userId) {
       console.log(this.authenticationService.getCurrentUser(this.tenant));
 
