@@ -1,4 +1,5 @@
-const domain = 'http://4.182.90.110.nip.io';
+// const domain = 'http://4.182.90.110.nip.io';
+const domain = 'http://localhost';
 export const environment = {
     production: true,
     cartServiceUrl: domain + '/api/cart',
